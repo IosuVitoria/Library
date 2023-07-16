@@ -1,48 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Botón con Color degradado que cambia al ser clicado</title>
-  <style>
-    .boton-personalizado {
-      background-image: linear-gradient(45deg, #ff6600, #ff3300); /* Color degradado naranja a rojo */
-      color: #fff;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 10px;
-      font-size: 18px;
-      cursor: pointer;
-      transition: background-image 0.3s, transform 0.2s;
-      animation: animarBoton 1s infinite;
-    }
-
-    .boton-personalizado:active {
-      background-image: linear-gradient(45deg, #006666, #003333); /* Color degradado verde azulado a verde oscuro al ser clicado */
-      transform: scale(0.95);
-    }
-
-    @keyframes animarBoton {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-5px);
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="boton4.js" defer></script>
+  <link rel="stylesheet" href="boton4.css">
+  <title>Boton que cambia</title>
 </head>
 <body>
   <button class="boton-personalizado" onclick="cambiarContenido(this)">Clicar</button>
-
-  <script>
-    function cambiarContenido(boton) {
-      if (boton.textContent === 'Clicar') {
-        boton.textContent = 'Clicado';
-        boton.style.backgroundImage = 'linear-gradient(45deg, #cc00cc, #660066)'; /* Color degradado morado a púrpura al ser clicado */
-      } else {
-        boton.textContent = 'Clicar';
-        boton.style.backgroundImage = 'linear-gradient(45deg, #ff6600, #ff3300)'; /* Color degradado naranja a rojo */
-      }
-    }
-  </script>
 </body>
 </html>
+
+
