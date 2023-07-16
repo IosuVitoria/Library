@@ -1,0 +1,60 @@
+/* Estilos para todos los elementos <button> */
+
+button {
+  /* Quita el borde del botón */
+  border: 0;
+  
+  /* Crea un gradiente de colores con una rotación de 150 grados */
+  background-image: linear-gradient(150deg, #9500ff, #09f, #00DDFF);
+  
+  /* Redondea los bordes del botón */
+  border-radius: 8px;
+  
+  /* Cambia el color del texto a blanco */
+  color: #fff;
+  
+  /* Permite que el botón se comporte como un contenedor flexible */
+  display: flex;
+  
+  /* Tamaño del texto del botón */
+  font-size: 18px;
+  
+  /* Espaciado interno del contenido dentro del botón */
+  padding: 4px;
+  
+  /* Cambia el cursor al pasar el mouse por encima del botón */
+  cursor: pointer;
+  
+  /* Establece una transición suave de 0.3 segundos en los cambios de estilo */
+  transition: .3s;
+}
+
+/* Estilos para el contenido dentro del botón (elemento <span>) */
+
+button span {
+  /* Fondo del contenido */
+  background-color: #111;
+  
+  /* Espaciado interno del contenido */
+  padding: 16px 24px;
+  
+  /* Redondea los bordes del contenido */
+  border-radius: 6px;
+  
+  /* Establece una transición suave de 0.3 segundos en los cambios de estilo */
+  transition: .3s;
+}
+
+/* Estilos al pasar el mouse por encima del botón */
+
+button:hover span {
+  /* Elimina el fondo del contenido */
+  background: none;
+}
+
+/* Estilos cuando se hace clic en el botón */
+
+button:active {
+  /* Escala el botón al 90% de su tamaño original */
+  transform: scale(0.9);
+}
