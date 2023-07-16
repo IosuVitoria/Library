@@ -1,69 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Star Wars Characters</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #000;
-      margin: 0;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      color: #ffd700;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .character-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 20px;
-    }
-
-    .character-card {
-      background-color: #000;
-      border: 2px solid #ffd700;
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .character-card:hover {
-      transform: scale(1.05);
-    }
-
-    .character-card img {
-      max-width: 100%;
-      border-radius: 5px;
-      margin-bottom: 10px;
-    }
-
-    .character-card h2 {
-      color: #ffd700;
-      margin-top: 0;
-    }
-
-    .character-card p {
-      color: #fff;
-      margin-bottom: 10px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Star Wars Characters</h1>
-    <div class="character-grid" id="character-grid"></div>
-  </div>
-
-  <script>
     // Realizar una solicitud para obtener la lista de personajes de Star Wars
     fetch('https://swapi.dev/api/people/')
       .then(response => response.json())
@@ -130,6 +64,3 @@
       }
       return '';
     }
-  </script>
-</body>
-</html>

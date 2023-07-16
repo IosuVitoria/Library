@@ -1,0 +1,86 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .question-container {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    margin: 10px 0;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  li:hover {
+    background-color: #f9f9f9;
+    transform: scale(1.05);
+  }
+  
+  .check-btn {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-image: linear-gradient(to bottom, #007bff, #0056b3);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .check-btn:hover {
+    background-image: linear-gradient(to bottom, #0056b3, #004099);
+    transform: scale(1.05);
+  }
+  
+  .result {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  
+  li {
+    /* ... Código anterior ... */
+    /* Estilos para opciones de respuesta */
+    padding: 10px 20px;
+    background-image: linear-gradient(to bottom, #f9f9f9, #f2f2f2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  li:hover {
+    background-image: linear-gradient(to bottom, #f2f2f2, #e5e5e5);
+  }
