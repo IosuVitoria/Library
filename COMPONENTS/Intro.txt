@@ -1,1 +1,10 @@
-Aquí vendrá el esquema de la carpeta componentes.
+Componentes tiene listados por carpetas lo siguiente:
+
+1. Botones.
+2. Sliders.
+3. Menus.
+4. Footers.
+5. Galerías.
+
+
+Para dar orden se respeta numeración de cada uno de ellos.
