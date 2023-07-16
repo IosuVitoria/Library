@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pokédex</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #E3350D;
+      margin-top: 10px;
+    }
+
+    .logo {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .pokemon-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+      margin-top: 20px;
+    }
+
+    .pokemon-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .pokemon-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .pokemon-name {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      margin-top: 10px;
+    }
+
+    .pokemon-id {
+      font-size: 14px;
+      color: #888;
+      margin-top: 5px;
+    }
+
+    .pokemon-type {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .pokemon-image {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .pagination-button {
+      padding: 10px 15px;
+      margin: 0 5px;
+      border: none;
+      background-color: #E3350D;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .pagination-button:hover {
+      background-color: #B31B0D;
+    }
+
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .filter-button {
+      padding: 8px 12px;
+      margin: 0 5px;
+      border: none;
+      background-color: #E3350D;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .filter-button:hover {
+      background-color: #B31B0D;
+    }
+  </style>
+</head>
+<body>
+  <img class="logo" src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png" alt="Pokémon Logo">
+
+  <h1>Pokédex</h1>
+
+  <div class="filter-container">
+    <button class="filter-button" onclick="filterPokemon('all')">All</button>
+    <button class="filter-button" onclick="filterPokemon('grass')">Grass</button>
+    <button class="filter-button" onclick="filterPokemon('fire')">Fire</button>
+    <button class="filter-button" onclick="filterPokemon('water')">Water</button>
+    <button class="filter-button" onclick="filterPokemon('electric')">Electric</button>
+    <button class="filter-button" onclick="filterPokemon('bug')">Bug</button>
+    <button class="filter-button" onclick="filterPokemon('normal')">Normal</button>
+    <button class="filter-button" onclick="filterPokemon('poison')">Poison</button>
+    <button class="filter-button" onclick="filterPokemon('flying')">Flying</button>
+    <button class="filter-button" onclick="filterPokemon('ground')">Ground</button>
+    <button class="filter-button" onclick="filterPokemon('fairy')">Fairy</button>
+    <button class="filter-button" onclick="filterPokemon('fighting')">Fighting</button>
+    <button class="filter-button" onclick="filterPokemon('psychic')">Psychic</button>
+    <button class="filter-button" onclick="filterPokemon('rock')">Rock</button>
+    <button class="filter-button" onclick="filterPokemon('ghost')">Ghost</button>
+    <button class="filter-button" onclick="filterPokemon('ice')">Ice</button>
+    <button class="filter-button" onclick="filterPokemon('dragon')">Dragon</button>
+    <button class="filter-button" onclick="filterPokemon('steel')">Steel</button>
+  </div>
+
+  <div class="pokemon-container">
+    <!-- Aquí se mostrarán los datos de los Pokémon -->
+  </div>
+
+  <div class="pagination">
+    <button class="pagination-button" id="previous">Previous</button>
+    <button class="pagination-button" id="next">Next</button>
+  </div>
+
+  <div class="pokemon-details-overlay">
+    <div class="pokemon-details">
+      <button class="close-button" onclick="closePokemonDetails()">Close</button>
+      <div class="details-content">
+        <img class="pokemon-details-image" src="" alt="">
+        <h2 class="pokemon-details-name"></h2>
+        <p class="pokemon-details-id"></p>
+        <p class="pokemon-details-type"></p>
+        <p class="pokemon-details-height"></p>
+        <p class="pokemon-details-weight"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let offset = 0;
+    const limit = 9;
+    let pokemonData = [];
+
+    // Función para obtener información de los Pokémon
+    function getPokemonData(offset) {
+      fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`)
+        .then(response => response.json())
+        .then(data => {
+          const pokemonList = data.results;
+          pokemonData = [];
+
+          Promise.all(pokemonList.map(pokemon => fetch(pokemon.url)
+            .then(response => response.json())
+            .then(pokemonDat => {
+              const pokemonTypes = pokemonDat.types.map(type => type.type.name);
+
+              const pokemon = {
+                name: pokemonDat.name,
+                id: pokemonDat.id,
+                image: pokemonDat.sprites.other['official-artwork'].front_default,
+                types: pokemonTypes,
+                height: pokemonDat.height,
+                weight: pokemonDat.weight
+              };
+
+              pokemonData.push(pokemon);
+            })
+            .catch(error => {
+              console.log(`Error: ${error}`);
+            })
+          ))
+          .then(() => {
+            // Ordenar los Pokémon por su ID
+            pokemonData.sort((a, b) => a.id - b.id);
+
+            // Mostrar los Pokémon en la página
+            displayPokemonData(pokemonData);
+          });
+        })
+        .catch(error => {
+          console.log(`Error: ${error}`);
+        });
+    }
+
+    // Función para mostrar los datos de los Pokémon
+    function displayPokemonData(pokemonData) {
+      const pokemonContainer = document.querySelector('.pokemon-container');
+      pokemonContainer.innerHTML = '';
+
+      pokemonData.forEach(pokemon => {
+        const pokemonCard = document.createElement('div');
+        pokemonCard.classList.add('pokemon-card');
+
+        const pokemonName = document.createElement('h2');
+        pokemonName.classList.add('pokemon-name');
+        pokemonName.textContent = pokemon.name;
+
+        const pokemonId = document.createElement('p');
+        pokemonId.classList.add('pokemon-id');
+        pokemonId.textContent = `ID: ${pokemon.id}`;
+
+        const pokemonImage = document.createElement('img');
+        pokemonImage.classList.add('pokemon-image');
+        pokemonImage.src = pokemon.image;
+        pokemonImage.alt = pokemon.name;
+
+        const pokemonType = document.createElement('p');
+        pokemonType.classList.add('pokemon-type');
+        pokemonType.textContent = `Type: ${pokemon.types.join(', ')}`;
+
+        // Agregar el evento de clic para mostrar los detalles del Pokémon
+        pokemonCard.addEventListener('click', () => {
+          openPokemonDetails(pokemon);
+        });
+
+        pokemonCard.appendChild(pokemonName);
+        pokemonCard.appendChild(pokemonId);
+        pokemonCard.appendChild(pokemonImage);
+        pokemonCard.appendChild(pokemonType);
+        pokemonContainer.appendChild(pokemonCard);
+      });
+    }
+
+    // Función para abrir los detalles del Pokémon
+    function openPokemonDetails(pokemon) {
+      const detailsOverlay = document.querySelector('.pokemon-details-overlay');
+      const detailsModal = document.querySelector('.pokemon-details');
+
+      detailsOverlay.classList.add('active');
+      detailsModal.classList.add('active');
+
+      const detailsImage = detailsModal.querySelector('.pokemon-details-image');
+      const detailsName = detailsModal.querySelector('.pokemon-details-name');
+      const detailsId = detailsModal.querySelector('.pokemon-details-id');
+      const detailsType = detailsModal.querySelector('.pokemon-details-type');
+      const detailsHeight = detailsModal.querySelector('.pokemon-details-height');
+      const detailsWeight = detailsModal.querySelector('.pokemon-details-weight');
+
+      detailsImage.src = pokemon.image;
+      detailsImage.alt = pokemon.name;
+      detailsName.textContent = pokemon.name;
+      detailsId.textContent = `ID: ${pokemon.id}`;
+      detailsType.textContent = `Type: ${pokemon.types.join(', ')}`;
+      detailsHeight.textContent = `Height: ${pokemon.height}`;
+      detailsWeight.textContent = `Weight: ${pokemon.weight}`;
+    }
+
+    // Función para cerrar los detalles del Pokémon
+    function closePokemonDetails() {
+      const detailsOverlay = document.querySelector('.pokemon-details-overlay');
+      const detailsModal = document.querySelector('.pokemon-details');
+
+      detailsOverlay.classList.remove('active');
+      detailsModal.classList.remove('active');
+    }
+
+    // Función para manejar el cambio de página
+    function handlePaginationClick(event) {
+      const buttonId = event.target.id;
+
+      if (buttonId === 'previous') {
+        offset -= limit;
+        if (offset < 0) {
+          offset = 0;
+        }
+      } else if (buttonId === 'next') {
+        offset += limit;
+      }
+
+      getPokemonData(offset);
+    }
+
+    // Función para filtrar los Pokémon por tipo
+    function filterPokemon(type) {
+      if (type === 'all') {
+        displayPokemonData(pokemonData);
+      } else {
+        const filteredPokemon = pokemonData.filter(pokemon => pokemon.types.includes(type));
+        displayPokemonData(filteredPokemon);
+      }
+    }
+
+    // Event Listeners para los botones de paginación
+    document.getElementById('previous').addEventListener('click', handlePaginationClick);
+    document.getElementById('next').addEventListener('click', handlePaginationClick);
+
+    // Obtener los Pokémon al cargar la página
+    getPokemonData(offset);
+  </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Star Wars Characters</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #ffd700;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+    }
+
+    .character-card {
+      background-color: #000;
+      border: 2px solid #ffd700;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .character-card:hover {
+      transform: scale(1.05);
+    }
+
+    .character-card img {
+      max-width: 100%;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .character-card h2 {
+      color: #ffd700;
+      margin-top: 0;
+    }
+
+    .character-card p {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Star Wars Characters</h1>
+    <div class="character-grid" id="character-grid"></div>
+  </div>
+
+  <script>
+    // Realizar una solicitud para obtener la lista de personajes de Star Wars
+    fetch('https://swapi.dev/api/people/')
+      .then(response => response.json())
+      .then(data => {
+        const characterGridContainer = document.getElementById('character-grid');
+
+        // Recorrer la lista de personajes y crear elementos para mostrar la información
+        data.results.forEach(character => {
+          const characterCard = document.createElement('div');
+          characterCard.classList.add('character-card');
+
+          const image = document.createElement('img');
+          fetch(`https://starwars-visualguide.com/assets/img/characters/${getImageId(character.url)}.jpg`)
+            .then(response => response.blob())
+            .then(blob => {
+              image.src = URL.createObjectURL(blob);
+            });
+          characterCard.appendChild(image);
+
+          const name = document.createElement('h2');
+          name.textContent = character.name;
+          characterCard.appendChild(name);
+
+          const height = document.createElement('p');
+          height.textContent = `Height: ${character.height}`;
+          characterCard.appendChild(height);
+
+          const mass = document.createElement('p');
+          mass.textContent = `Mass: ${character.mass}`;
+          characterCard.appendChild(mass);
+
+          const hairColor = document.createElement('p');
+          hairColor.textContent = `Hair Color: ${character.hair_color}`;
+          characterCard.appendChild(hairColor);
+
+          const skinColor = document.createElement('p');
+          skinColor.textContent = `Skin Color: ${character.skin_color}`;
+          characterCard.appendChild(skinColor);
+
+          const eyeColor = document.createElement('p');
+          eyeColor.textContent = `Eye Color: ${character.eye_color}`;
+          characterCard.appendChild(eyeColor);
+
+          const birthYear = document.createElement('p');
+          birthYear.textContent = `Birth Year: ${character.birth_year}`;
+          characterCard.appendChild(birthYear);
+
+          const gender = document.createElement('p');
+          gender.textContent = `Gender: ${character.gender}`;
+          characterCard.appendChild(gender);
+
+          characterGridContainer.appendChild(characterCard);
+        });
+      })
+      .catch(error => {
+        console.error('Error al obtener la lista de personajes:', error);
+      });
+
+    // Función auxiliar para extraer el ID de la URL del personaje
+    function getImageId(url) {
+      const matches = url.match(/\/(\d+)\/$/);
+      if (matches && matches.length === 2) {
+        return matches[1];
+      }
+      return '';
+    }
+  </script>
+</body>
+</html>
