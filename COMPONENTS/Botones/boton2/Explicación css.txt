@@ -1,0 +1,21 @@
+/* Estilos para el botón con efecto de rebote */
+.boton-rebote {
+  background-color: #ff6347; /* Color de fondo del botón */
+  border: none; /* Sin borde */
+  color: #fff; /* Color del texto */
+  padding: 10px 20px; /* Espaciado interno del contenido */
+  border-radius: 50px; /* Redondea los bordes del botón */
+  font-size: 16px; /* Tamaño del texto del botón */
+  cursor: pointer; /* Cambia el cursor al pasar por encima del botón */
+  animation: rebote 1s infinite; /* Aplica la animación "rebote" al botón de manera infinita */
+}
+
+/* Definición de la animación "rebote" */
+@keyframes rebote {
+  0%, 100% {
+    transform: translateY(0); /* La animación inicia y termina sin desplazamiento vertical (posición inicial) */
+  }
+  50% {
+    transform: translateY(-10px); /* En el punto medio de la animación, el botón se desplaza hacia arriba 10px */
+  }
+}
