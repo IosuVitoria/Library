@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+/*Al establecer display: block, el pseudo-elemento se coloca en una nueva línea y ocupa todo el ancho disponible dentro de su contenedor. Esto garantiza que la línea que se crea con width: 100% y height: 2px se extienda horizontalmente y ocupe todo el ancho de su contenedor, que en este caso es el elemento <h1>*/
+
+h1::after{
+    content: "";
+    width: 100%;
+    height: 3px;
+    display:block;
+    background: #000;
+}
+
+h1:hover{
+    transform: scale(1.1);
+    box-shadow: rgba(0,0,0,0.1);
+    transition: transform .5s ease-in-out;
+}
