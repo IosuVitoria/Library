@@ -1,0 +1,29 @@
+#maze {
+    display: grid;
+    grid-template-columns: repeat(20, 40px);
+    grid-template-rows: repeat(20, 40px);
+    width: 800px;
+    height: 800px;
+    margin: 50px auto;
+  }
+  
+  .cell {
+    border: 1px solid black;
+  }
+  
+  .player {
+    background-color: yellow;
+  }
+  
+  .wall {
+    background-color: black;
+  }
+  
+  .entry {
+    background-color: blue;
+  }
+  
+  .exit {
+    background-color: green;
+  }
+  
