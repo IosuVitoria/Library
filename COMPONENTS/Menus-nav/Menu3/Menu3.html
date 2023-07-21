@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Menu desplegable hacia abajo</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Menu desplegable.</h1>
+        <h3>Mueve el ratón sobre el menú</h3>
+        <div class="dropdown">
+            <button class="dropbtn">Desplegar</button>
+            <div class="dropdown-content">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+
+    <h4>Explicación:</h4>
+    <p>
+        El menú desplegable está creado utilizando HTML y CSS. La estructura básica consiste en un contenedor con la clase "dropdown",
+        que contiene un botón con la clase "dropbtn" y un div con la clase "dropdown-content".
+        Cuando el usuario coloca el cursor sobre el botón, se activa la aparición del menú en el div con la clase "dropdown-content" debido a las
+        pseudo-clases ":hover" de CSS.
+    </p>
+    <p>
+        El CSS proporcionado define el estilo del menú desplegable. El botón tiene un color de fondo verde que cambia a un tono más oscuro cuando
+        se pasa el cursor sobre él. El div con la clase "dropdown-content" tiene una apariencia inicial oculta mediante la propiedad "display: none".
+        Cuando se coloca el cursor sobre el botón, el menú se muestra cambiando su propiedad "display" a "block", lo que lo hace visible.
+        Además, se establece una sombra y se agrega un efecto de cambio de color en los enlaces del menú cuando el cursor se posa sobre ellos.
+    </p>
+</body>
+</html>
